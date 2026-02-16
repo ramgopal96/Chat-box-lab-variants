@@ -1,0 +1,270 @@
+<!-- AI OVERLAY -->
+<div class="ai-overlay" id="aiOverlay">
+    <div class="ai-divider">
+        <div class="ai-divider-logo">
+            <img src="assets/full_screen/aa3337979e1fa838164e33d8dd7c08a9cbbf5dc6.svg" alt="Owting">
+        </div>
+        <div class="ai-divider-content">
+            <div class="ai-divider-line"></div>
+            <div class="ai-divider-text">
+                You’re planning an event with Owting AI<br>
+                Only visible to you until you share
+            </div>
+            <div class="ai-divider-line"></div>
+        </div>
+    </div>
+
+    <!-- Initial Greeting -->
+    <div class="message-group received-group">
+        <div class="message received">
+            Looks like you have something in mind — let’s shape it together ✨<br><br>
+            Start with the basics (what, when, and where), and I’ll help fill in the rest 💭
+            <div class="message-time">6:30 PM</div>
+        </div>
+    </div>
+
+    <!-- Suggestion Card (Static visual only initially) -->
+    <div class="ai-options-card" id="wizardCard">
+        <!-- Location Row -->
+        <div class="ai-option-row" id="optLocation" onclick="openSheet('location')">
+            <div class="ai-option-label">Location</div>
+            <div class="ai-option-value" id="valLocation"></div>
+            <div class="ai-option-icon">
+                <img src="assets/full_screen/d4be42543c5ccb183ff01db315a626554652324b.svg"
+                    style="width: 20px; height: 20px;" alt="Loc">
+            </div>
+        </div>
+        <!-- Time Row -->
+        <div class="ai-option-row" id="optTime" onclick="openSheet('time')">
+            <div class="ai-option-label">Time</div>
+            <div class="ai-option-value" id="valTime"></div>
+            <div class="ai-option-icon">
+                <img src="assets/full_screen/a65f5c9a9ee601de3093ffc531a7069f67fed62a.svg"
+                    style="width: 20px; height: 20px;" alt="Time">
+            </div>
+        </div>
+        <!-- Activity Row -->
+        <div class="ai-option-row" id="optActivity" onclick="openSheet('activity')">
+            <div class="ai-option-label">Activity</div>
+            <div class="ai-option-value" id="valActivity"></div>
+            <div class="ai-option-icon">
+                <img src="assets/full_screen/435cc90b9a04490badba1e0b76b568e08aad7fe5.svg"
+                    style="width: 20px; height: 20px;" alt="Act">
+            </div>
+        </div>
+    </div>
+
+    <!-- Generating Animation -->
+    <div class="generating-dots" id="generatingDots">
+        <div class="generating-dot"></div>
+        <div class="generating-dot"></div>
+        <div class="generating-dot"></div>
+    </div>
+
+    <div class="ai-message" id="resultMessage" style="display:none">
+        <div class="ai-message-avatar">
+            <img src="assets/full_screen/46a454a14686c0d6da2856f10afde8515e6333f2.svg" class="avatar-bg" alt="bg">
+            <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" class="avatar-logo" alt="logo">
+        </div>
+        <div class="ai-message-bubble">
+            Here's what I've put together for you! 🎉 Check out these Owting ideas:
+            <div class="ai-time">6:31 PM</div>
+        </div>
+    </div>
+
+    <!-- Event Cards Wrapper -->
+    <div class="ai-event-cards-wrapper" id="eventCards">
+        <div class="ai-cards-scroll">
+            <!-- Card 1 -->
+            <div class="event-card selected">
+                <div class="event-card-image">
+                    <img src="assets/full_screen/3baed4f738a0653d9d300d8442da650050875bfb.png" alt="Golf">
+                    <div class="event-card-date">
+                        Aug <span>14</span>
+                    </div>
+                    <div class="event-card-activity-badge">⛳</div>
+                </div>
+                <div class="event-card-body">
+                    <div class="event-card-time">8:00 PM - 10:00 PM</div>
+                    <div class="event-card-title">Topgolf Night</div>
+                    <div class="event-card-tags">
+                        <div class="event-card-tag">⛳ Golf</div>
+                        <div class="event-card-tag">🍸 Drinks</div>
+                        <div class="event-card-tag">🌮 Food</div>
+                    </div>
+                    <div class="event-card-desc">
+                        Enjoy a fun evening of golf, drinks, and food at Topgolf. Perfect for a group Owting!
+                    </div>
+                    <div class="event-card-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Macarthur Park
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="event-card">
+                <div class="event-card-image">
+                    <img src="assets/full_screen/9395029e061bf64c988dd2333cf4839841261356.png" alt="Golf">
+                    <div class="event-card-date">
+                        Aug <span>14</span>
+                    </div>
+                    <div class="event-card-activity-badge">⛳</div>
+                </div>
+                <div class="event-card-body">
+                    <div class="event-card-time">8:00 PM - 10:00 PM</div>
+                    <div class="event-card-title">Mini Golf Madness</div>
+                    <div class="event-card-tags">
+                        <div class="event-card-tag">⛳ Golf</div>
+                        <div class="event-card-tag">🎉 Fun</div>
+                    </div>
+                    <div class="event-card-desc">
+                        Classic mini golf experience with fun obstacles and challenges.
+                    </div>
+                    <div class="event-card-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Downtown Links
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Chat options -->
+<div class="ai-quick-responses" id="quickResponses">
+    <div class="ai-quick-pill" onclick="handleAction('edit')">Edit Owting</div>
+    <div class="ai-quick-pill" onclick="handleAction('save')">Save for Later</div>
+    <div class="ai-quick-pill" onclick="handleAction('regenerate')">Generate Again</div>
+</div>
+
+<!-- Bottom Sheet Backdrop -->
+<div class="bottom-sheet-backdrop" id="sheetBackdrop" onclick="closeSheet()"></div>
+
+<!-- Location Sheet -->
+<div class="bottom-sheet" id="sheetLocation">
+    <div class="bottom-sheet-handle"></div>
+    <div class="bottom-sheet-title">Location</div>
+    <div class="bottom-sheet-content">
+        <div class="search-bar-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" class="search-bar" placeholder="Search Maps" value="Macarthur Park">
+        </div>
+        <div class="map-placeholder">
+            <div class="map-grid"></div>
+            <div class="map-label">Macarthur Park</div>
+            <div class="map-pin" style="margin-top: 40px;">
+                <div class="map-pin-head">
+                    <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" alt="Owting Pin">
+                </div>
+                <div class="map-pin-tail"></div>
+            </div>
+        </div>
+        <button class="sheet-save-btn" onclick="saveLocation()">Save</button>
+    </div>
+</div>
+
+<!-- Time Sheet -->
+<div class="bottom-sheet" id="sheetTime">
+    <div class="bottom-sheet-handle"></div>
+    <div class="bottom-sheet-title">Time</div>
+    <div class="bottom-sheet-content">
+        <div class="calendar-header">
+            <button class="calendar-nav">‹</button>
+            <span class="calendar-month">August, 2023</span>
+            <button class="calendar-nav">›</button>
+        </div>
+        <div class="calendar-grid">
+            <div class="cal-day-name">Mon</div>
+            <div class="cal-day-name">Tue</div>
+            <div class="cal-day-name">Wed</div>
+            <div class="cal-day-name">Thu</div>
+            <div class="cal-day-name">Fri</div>
+            <div class="cal-day-name">Sat</div>
+            <div class="cal-day-name">Sun</div>
+            <div class="cal-day muted">31</div>
+            <div class="cal-day">1</div>
+            <div class="cal-day">2</div>
+            <div class="cal-day today">3</div>
+            <div class="cal-day">4</div>
+            <div class="cal-day">5</div>
+            <div class="cal-day">6</div>
+            <div class="cal-day">7</div>
+            <div class="cal-day">8</div>
+            <div class="cal-day">9</div>
+            <div class="cal-day">10</div>
+            <div class="cal-day">11</div>
+            <div class="cal-day">12</div>
+            <div class="cal-day">13</div>
+            <div class="cal-day selected">14</div>
+            <div class="cal-day">15</div>
+            <div class="cal-day">16</div>
+            <div class="cal-day">17</div>
+            <div class="cal-day">18</div>
+            <div class="cal-day">19</div>
+            <div class="cal-day">20</div>
+            <div class="cal-day">21</div>
+            <div class="cal-day">22</div>
+            <div class="cal-day">23</div>
+            <div class="cal-day">24</div>
+            <div class="cal-day">25</div>
+            <div class="cal-day">26</div>
+            <div class="cal-day">27</div>
+            <div class="cal-day">28</div>
+            <div class="cal-day">29</div>
+            <div class="cal-day">30</div>
+            <div class="cal-day">31</div>
+            <div class="cal-day muted">1</div>
+            <div class="cal-day muted">2</div>
+            <div class="cal-day muted">2</div>
+        </div>
+        <div class="time-row">
+            <input type="text" class="time-input" placeholder="Start Time*" value="8:00 PM">
+            <input type="text" class="time-input" placeholder="End Time*" value="2:00 AM">
+        </div>
+        <button class="sheet-save-btn" onclick="saveTime()">Save</button>
+    </div>
+</div>
+
+<!-- Activity Sheet -->
+<div class="bottom-sheet" id="sheetActivity">
+    <div class="bottom-sheet-handle"></div>
+    <div class="bottom-sheet-title">Activity</div>
+    <div class="bottom-sheet-content">
+        <div class="activity-list">
+            <div class="activity-item" onclick="selectActivity(this, 'Hiking')">
+                <span class="activity-emoji">🥾</span>
+                <span class="activity-name">Hiking</span>
+            </div>
+            <div class="activity-item selected" onclick="selectActivity(this, 'Golf')">
+                <span class="activity-emoji">⛳</span>
+                <span class="activity-name">Golf</span>
+            </div>
+            <div class="activity-item" onclick="selectActivity(this, 'Running')">
+                <span class="activity-emoji">🏃</span>
+                <span class="activity-name">Running</span>
+            </div>
+            <div class="activity-item" onclick="selectActivity(this, 'Coffee')">
+                <span class="activity-emoji">☕</span>
+                <span class="activity-name">Coffee</span>
+            </div>
+            <div class="activity-item" onclick="selectActivity(this, 'Beach')">
+                <span class="activity-emoji">🏖️</span>
+                <span class="activity-name">Beach</span>
+            </div>
+            <div class="activity-item" onclick="selectActivity(this, 'Dinner')">
+                <span class="activity-emoji">🍽️</span>
+                <span class="activity-name">Dinner</span>
+            </div>
+        </div>
+        <button class="sheet-save-btn" onclick="saveActivity()">Save</button>
+    </div>
+</div>

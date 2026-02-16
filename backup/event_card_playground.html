@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Card Playground</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+        /* VAG Rundschrift fallback */
+        @font-face {
+            font-family: 'VAG Rundschrift D';
+            src: local('VAG Rundschrift D'), local('VAGRundschriftD'), url('https://fonts.cdnfonts.com/s/16474/VAGRundschriftD.woff') format('woff');
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .playground-container {
+            display: flex;
+            gap: 20px;
+            padding: 40px;
+            background: #eef2f6;
+            /* Simulate app background */
+            overflow-x: auto;
+        }
+
+        /* --- Event Card Styles (Isolated) --- */
+        .event-card {
+            min-width: 259px;
+            max-width: 259px;
+            background: white;
+            border-radius: 20px;
+            /* Visually looks softer than 16px */
+            overflow: hidden;
+            padding: 6px;
+            /* Slightly more breathing room for the internal radius */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            /* Softer, deeper shadow */
+            border: 0.83px solid #F4F4F4;
+            /* Restoring the subtle gray border */
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-sizing: border-box;
+        }
+
+        /* User asked to forget the blue stroke, so selected state just matches base */
+        .event-card.selected {
+            border: 0.83px solid #F4F4F4;
+            /* Same as default, no blue stroke */
+            /* Optional: maybe a slightly stronger shadow to indicate selection if needed, 
+               but user said "forget the blue stroke" likely implying no visible selection border */
+        }
+
+        .event-card-image {
+            width: 100%;
+            height: 142px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .event-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .event-card-date {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #fafafa;
+            color: rgba(0, 0, 0, 0.5);
+            border-radius: 14px;
+            padding: 4px 0;
+            font-size: 10px;
+            font-weight: 500;
+            line-height: 12px;
+            text-align: center;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 39px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .event-card-date span {
+            display: block;
+            font-size: 19px;
+            font-weight: 700;
+            color: #151E52;
+            letter-spacing: 0;
+            line-height: 20px;
+            margin-top: 1px;
+        }
+
+        .event-card-activity-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 28px;
+            height: 28px;
+            background: #d2fbb9;
+            border: 1.2px solid #151E52;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            line-height: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .event-card-body {
+            padding: 0 6px 8px;
+            /* Adjusted padding to align with image edges visually */
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .event-card-time {
+            font-size: 11px;
+            font-weight: 500;
+            color: #5b5b5b;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 2px;
+        }
+
+        .event-card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #151E52;
+            line-height: 1.1;
+            font-family: 'VAG Rundschrift D', 'Poppins', sans-serif;
+            margin-bottom: 2px;
+        }
+
+        .event-card-tags {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .event-card-tag {
+            font-size: 9px;
+            font-weight: 600;
+            color: #5b5b5b;
+            background: #def8ff;
+            padding: 3px 6px;
+            border-radius: 6px;
+            /* Slightly softer than 14px full round */
+            opacity: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .event-card-desc {
+            font-size: 10.5px;
+            color: #949ca8;
+            line-height: 1.4;
+            height: 42px;
+            /* 3 lines roughly */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            margin-bottom: 4px;
+        }
+
+        .event-card-location {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10.5px;
+            color: #949ca8;
+            font-weight: 400;
+        }
+
+        .event-card-location svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="playground-container">
+        <!-- Card 1: Selected State -->
+        <div class="event-card selected">
+            <div class="event-card-image">
+                <img src="assets/full_screen/475c2a667879fd71917ee124ea7ff0abcaa45331.png" alt="Top Golf">
+                <div class="event-card-date">SEP<span>19</span></div>
+                <div class="event-card-activity-badge">⛳</div>
+            </div>
+            <div class="event-card-body">
+                <div class="event-card-time">8:00PM - 2:00AM</div>
+                <div class="event-card-title">Thursday Night Top Golf</div>
+                <div class="event-card-tags">
+                    <span class="event-card-tag">Physical</span>
+                    <span class="event-card-tag">Intermediate</span>
+                    <span class="event-card-tag">Free</span>
+                </div>
+                <div class="event-card-desc">We're getting a bunch of friends together to go play top golf. We can eat,
+                    drink, and chat!</div>
+                <div class="event-card-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Los Angeles, CA
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Default State -->
+        <div class="event-card">
+            <div class="event-card-image">
+                <img src="assets/full_screen/b95fd8da187bc45d6289762d6d5aab8fa6603a8d.png" alt="PCH Run">
+                <div class="event-card-date">AUG<span>7</span></div>
+                <div class="event-card-activity-badge">🏃‍♂️</div>
+            </div>
+            <div class="event-card-body">
+                <div class="event-card-time">6:00PM - 7:30PM</div>
+                <div class="event-card-title">PCH Run Club🏃‍♂️🏃‍♀️</div>
+                <div class="event-card-tags">
+                    <span class="event-card-tag">Running</span>
+                    <span class="event-card-tag">Beach</span>
+                    <span class="event-card-tag">Casual</span>
+                </div>
+                <div class="event-card-desc">Join us for an exhilarating evening run along the beautiful Pacific Coast
+                    Highway! Whether you're a seasoned runner or just starting out...</div>
+                <div class="event-card-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Los Angeles, CA
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

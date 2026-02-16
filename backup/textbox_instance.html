@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owting Textbox Component - Exact Figma Specs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-owting: #151E52;
+            --secondary-owting: #6FC9E8;
+            --text-primary: #1B1A57;
+            --bg-page: #EBEEF6;
+            --white-owting: #FFFFFF;
+            --input-gradient: linear-gradient(180deg, rgba(235, 238, 246, 0) 7.35%, #f6f8fb 79.36%, #ffffff 100%);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-page);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* The Frame (27538:11121) 430px wide total */
+        .component-wrapper {
+            width: 430px;
+            /* Height is derived from content + padding */
+            /* pt-8px, pb-24px. Height of internal elements: 50px (pill) or 43px (button) */
+            /* Max height element is the pill at 50px */
+            /* Total height = 8 + 50 + 24 = 82px? Figma said 108px? 
+               Maybe the pill is taller. 
+               Pill has py-16px. Text line-height is 18px. 16+16+18 = 50px.
+               Wait, why 108px? 
+               Let's check the gradient again.
+            */
+            background: var(--input-gradient);
+            display: flex;
+            align-items: center;
+            /* Center vertically? React code says items-center */
+            /* Padding: pt-[8px] pb-[24px] px-[16px] */
+            padding: 8px 16px 24px 16px;
+            gap: 10px;
+            box-sizing: border-box;
+            /* If Figma says 108px height, and content is only ~82px, then maybe vertical padding is larger or distribution is different?
+               Button is 43px. Pill is 50px.
+               If I manually set height to 108px, standard flex centering might spread them out.
+               But the React code says 'items-center'.
+               Let's trust the padding and content size first.
+            */
+        }
+
+        /* Inner Box (27538:11122) - The Pill */
+        .input-box {
+            flex: 1;
+            /* flex-[1_0_0] */
+            /* py-[16px] px-[22px] */
+            padding: 16px 22px;
+            background: var(--white-owting);
+            border-radius: 30px;
+            box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            /* gap-[24px] between Plus and Text */
+            gap: 24px;
+            box-sizing: border-box;
+            /* Width min-w-px */
+            height: 50px;
+            /* Explicit height based on calculation */
+        }
+
+        /* Plus Icon (27538:11124) */
+        .plus-icon-container {
+            width: 12px;
+            height: 12px;
+            position: relative;
+            flex-shrink: 0;
+            /* inset-[-12.5%] implies scaling/overflow. 
+               If the svg is 100% size, it fits in 12px.
+            */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .plus-icon {
+            width: 12px !important;
+            height: 12px !important;
+            object-fit: contain;
+            display: block;
+        }
+
+        .placeholder {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            /* text-[14px] */
+            color: var(--text-primary);
+            /* #1B1A57 */
+            opacity: 0.5;
+            /* opacity-50 */
+            line-height: 18px;
+            /* leading-[18px] */
+            white-space: pre-wrap;
+            user-select: none;
+        }
+
+        /* Owting Button (27538:11129) */
+        .owting-button {
+            width: 43px;
+            height: 43px;
+            position: relative;
+            /* grid-cols-[max-content] ... relative */
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .button-bg {
+            position: absolute;
+            inset: 0;
+            width: 43px !important;
+            height: 43px !important;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Logo Positioning: ml-[6.14px] mt-[12px] */
+        .button-logo {
+            position: absolute;
+            top: 12px;
+            left: 6.14px;
+            width: 30.77px !important;
+            height: 18px !important;
+            object-fit: contain;
+            display: block;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="component-wrapper">
+        <div class="input-box">
+            <div class="plus-icon-container">
+                <img src="assets/full_screen/ed43cac8fcfac9b75ee788843a449bc635d60759.svg" class="plus-icon" alt="plus">
+            </div>
+            <div class="placeholder">Write a message...</div>
+        </div>
+        <div class="owting-button">
+            <!-- Background Blue Circle -->
+            <img src="assets/full_screen/46a454a14686c0d6da2856f10afde8515e6333f2.svg" class="button-bg" alt="bg">
+            <!-- Owl Logo scaled exactly -->
+            <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" class="button-logo" alt="logo">
+        </div>
+    </div>
+
+</body>
+
+</html>

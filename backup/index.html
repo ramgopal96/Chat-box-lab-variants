@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owting Chat - John Human</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="iphone-container">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="time">10:02</div>
+            <div class="status-icons">
+                <!-- Cellular Connection -->
+                <svg width="20" height="13" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="6" width="3.5" height="6.5" rx="1" fill="#151E52" />
+                    <rect x="5.5" y="4.5" width="3.5" height="8" rx="1" fill="#151E52" />
+                    <rect x="10.5" y="2.5" width="3.5" height="10" rx="1" fill="#151E52" />
+                    <rect x="15.5" y="0.5" width="3.5" height="12" rx="1" fill="#151E52" opacity="0.3" />
+                </svg>
+                <img src="assets/full_screen/065de82c6da05bd7303c7597f3fb6e4051d4d8d1.svg" class="status-icon"
+                    alt="Wifi">
+                <!-- Battery/Frame -->
+                <svg width="28" height="13" viewBox="0 0 28 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="23.5" height="11" rx="2.5" stroke="#151E52" stroke-opacity="0.35" />
+                    <path d="M26 4L26 8.5" stroke="#151E52" stroke-opacity="0.35" stroke-linecap="round" />
+                    <rect x="2.5" y="2.5" width="19.5" height="7" rx="1" fill="#151E52" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="profile-section">
+                <div class="header-icon-wrapper back-button">
+                    <img src="assets/full_screen/0d260dd3070b6b2f63869a39ea0ff23b677e5e67.svg" class="back-icon"
+                        alt="Back">
+                </div>
+                <div class="avatar-container">
+                    <img src="assets/full_screen/0d01b98c2977aa404ccb3e9ed56890aa3fee11c9.png" alt="John Human"
+                        class="avatar">
+                    <div class="activity-indicator"></div>
+                </div>
+                <div class="user-info">
+                    <h1 class="user-name">John Human</h1>
+                    <div class="user-status">
+                        Active
+                        <img src="assets/full_screen/65bb484b70db90bc2af58747997c0a4ff45023d5.svg"
+                            class="status-chevron" alt="chevron">
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="header-icon-wrapper">
+                    <img src="assets/full_screen/a65f5c9a9ee601de3093ffc531a7069f67fed62a.svg" class="action-icon"
+                        alt="Schedule">
+                </div>
+                <div class="header-icon-wrapper">
+                    <img src="assets/full_screen/ea497d73f0e8d8ceb7707bb7e32b6a7bd68d8392.svg" class="more-icon"
+                        alt="More">
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Body -->
+        <main class="chat-body" id="chatBody">
+            <div class="date-divider">
+                <div class="line"></div>
+                <span class="date-text">Yesterday</span>
+                <div class="line"></div>
+            </div>
+
+            <div class="message-group received-group">
+                <div class="message received">
+                    sup man, you still down to hit that ridge trail this weekend?
+                    <div class="message-time">10:32 PM</div>
+                </div>
+                <div class="reaction">👍</div>
+            </div>
+
+            <div class="date-divider">
+                <div class="line"></div>
+                <span class="date-text">Today</span>
+                <div class="line"></div>
+            </div>
+
+            <div class="message-group sent-group">
+                <div class="message sent">
+                    Always.
+                    <div class="message-time">6:30 PM</div>
+                </div>
+            </div>
+
+            <div class="message-group sent-group">
+                <div class="message sent">
+                    The one that almost killed us???
+                    <div class="message-time">6:30 PM</div>
+                </div>
+                <div class="reaction">❤️</div>
+            </div>
+
+            <div class="message-group received-group">
+                <div class="message received">
+                    Character-building trail yeah
+                    <div class="message-time">6:30 PM</div>
+                </div>
+            </div>
+
+
+        </main>
+
+        <!-- AI OVERLAY -->
+        <div class="ai-overlay" id="aiOverlay">
+            <div class="ai-divider">
+                <div class="ai-divider-logo">
+                    <img src="assets/full_screen/aa3337979e1fa838164e33d8dd7c08a9cbbf5dc6.svg" alt="Owting">
+                </div>
+                <div class="ai-divider-content">
+                    <div class="ai-divider-line"></div>
+                    <div class="ai-divider-text">
+                        You’re planning an event with Owting AI<br>
+                        Only visible to you until you share
+                    </div>
+                    <div class="ai-divider-line"></div>
+                </div>
+            </div>
+
+            <!-- Initial Greeting -->
+            <div class="message-group received-group">
+                <div class="message received">
+                    <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" class="ai-branding-logo"
+                        alt="Owting">
+                    Looks like you have something in mind — let’s shape it together ✨<br><br>
+                    Start with the basics (what, when, and where), and I’ll help fill in the rest 💭
+                    <div class="message-time">6:30 PM</div>
+                </div>
+                <div class="reaction" style="right: -8px; left: auto;">👍</div>
+            </div>
+
+            <!-- Suggestion Card (Static visual only initially) -->
+            <div class="ai-options-card" id="wizardCard">
+                <!-- Location Row -->
+                <div class="ai-option-row" id="optLocation" onclick="openSheet('location')">
+                    <div class="ai-option-label">Location</div>
+                    <div class="ai-option-value" id="valLocation"></div>
+                    <div class="ai-option-icon">
+                        <img src="assets/full_screen/d4be42543c5ccb183ff01db315a626554652324b.svg"
+                            style="width: 20px; height: 20px;" alt="Loc">
+                    </div>
+                </div>
+                <!-- Time Row -->
+                <div class="ai-option-row" id="optTime" onclick="openSheet('time')">
+                    <div class="ai-option-label">Time</div>
+                    <div class="ai-option-value" id="valTime"></div>
+                    <div class="ai-option-icon">
+                        <img src="assets/full_screen/a65f5c9a9ee601de3093ffc531a7069f67fed62a.svg"
+                            style="width: 20px; height: 20px;" alt="Time">
+                    </div>
+                </div>
+                <!-- Activity Row -->
+                <div class="ai-option-row" id="optActivity" onclick="openSheet('activity')">
+                    <div class="ai-option-label">Activity</div>
+                    <div class="ai-option-value" id="valActivity"></div>
+                    <div class="ai-option-icon">
+                        <img src="assets/full_screen/435cc90b9a04490badba1e0b76b568e08aad7fe5.svg"
+                            style="width: 20px; height: 20px;" alt="Act">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generating Animation -->
+            <div class="generating-dots" id="generatingDots">
+                <div class="generating-dot"></div>
+                <div class="generating-dot"></div>
+                <div class="generating-dot"></div>
+            </div>
+
+            <!-- AI Result Message (Hidden initially) -->
+            <div class="ai-message" id="resultMessage" style="display:none">
+                <div class="ai-message-avatar">
+                    <img src="assets/full_screen/46a454a14686c0d6da2856f10afde8515e6333f2.svg" class="avatar-bg"
+                        alt="bg">
+                    <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" class="avatar-logo"
+                        alt="logo">
+                </div>
+                <div class="ai-message-bubble">
+                    <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" class="ai-branding-logo"
+                        alt="Owting">
+                    Here's what I've put together for you! 🎉 Check out these Owting ideas:
+                    <div class="ai-time">6:31 PM</div>
+                </div>
+            </div>
+
+            <!-- Event Cards Wrapper -->
+            <div class="ai-event-cards-wrapper" id="eventCards">
+                <div class="ai-cards-scroll">
+                    <!-- Card 1 -->
+                    <div class="event-card selected">
+                        <div class="event-card-image">
+                            <img src="assets/full_screen/475c2a667879fd71917ee124ea7ff0abcaa45331.png" alt="Top Golf">
+                            <div class="event-card-date">SEP<span>19</span></div>
+                            <div class="event-card-activity-badge">⛳</div>
+                        </div>
+                        <div class="event-card-body">
+                            <div class="event-card-time">8:00PM - 2:00AM</div>
+                            <div class="event-card-title">Thursday Night Top Golf</div>
+                            <div class="event-card-tags">
+                                <span class="event-card-tag">Physical</span>
+                                <span class="event-card-tag">Intermediate</span>
+                                <span class="event-card-tag">Free</span>
+                            </div>
+                            <div class="event-card-desc">We're getting a bunch of friends together to go play top golf.
+                                We can eat, drink, and chat!</div>
+                            <div class="event-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Los Angeles, CA
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="event-card">
+                        <div class="event-card-image">
+                            <img src="assets/full_screen/b95fd8da187bc45d6289762d6d5aab8fa6603a8d.png" alt="PCH Run">
+                            <div class="event-card-date">AUG<span>7</span></div>
+                            <div class="event-card-activity-badge">🏃‍♂️</div>
+                        </div>
+                        <div class="event-card-body">
+                            <div class="event-card-time">6:00PM - 7:30PM</div>
+                            <div class="event-card-title">PCH Run Club🏃‍♂️🏃‍♀️</div>
+                            <div class="event-card-tags">
+                                <span class="event-card-tag">Running</span>
+                                <span class="event-card-tag">Beach</span>
+                                <span class="event-card-tag">Casual</span>
+                            </div>
+                            <div class="event-card-desc">Join us for an exhilarating evening run along the beautiful
+                                Pacific Coast Highway! Whether you're a seasoned runner or just starting out...</div>
+                            <div class="event-card-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Los Angeles, CA
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Chat options -->
+            <div class="ai-quick-responses" id="quickResponses">
+                <div class="ai-quick-pill" onclick="handleAction('edit')">Edit Owting</div>
+                <div class="ai-quick-pill" onclick="handleAction('share')">Share Owting</div>
+                <div class="ai-quick-pill" onclick="handleAction('save')">Save for Later</div>
+                <div class="ai-quick-pill" onclick="handleAction('regenerate')">Generate Again</div>
+            </div>
+        </div>
+
+        <!-- Bottom Sheet Backdrop -->
+        <div class="bottom-sheet-backdrop" id="sheetBackdrop" onclick="closeSheet()"></div>
+
+        <!-- Location Sheet -->
+        <div class="bottom-sheet" id="sheetLocation">
+            <div class="bottom-sheet-handle"></div>
+            <div class="bottom-sheet-title-wrapper">
+                <div class="bottom-sheet-title">Location</div>
+            </div>
+
+            <div class="location-search-wrapper">
+                <img src="assets/location_modal/search.svg" style="width: 16px; height: 16px;" alt="search">
+                <input type="text" class="location-search-input" placeholder="Search Maps" value="Search Maps">
+            </div>
+
+            <div class="map-viewport">
+                <!-- Map Base Image -->
+                <img src="assets/location_modal/map_base.png" class="map-base" alt="Map">
+
+                <!-- Macarthur Park Label -->
+                <div class="map-annotation-label">Macarthur Park</div>
+
+                <!-- Owting Pin with specialized glow/style -->
+                <div class="map-pin-icon" style="top: 224px; left: 113.5px; width: 162px; height: 110px;">
+                    <img src="assets/location_modal/pin.svg" alt="Pin" style="width: 100%; height: 100%;">
+                </div>
+
+                <!-- Current Location / Compass Button -->
+                <div class="map-current-pos">
+                    <img src="assets/location_modal/compass.svg" style="width: 24px; height: 24px;" alt="Compass">
+                </div>
+            </div>
+
+            <div class="sheet-save-container">
+                <button class="sheet-save-button" onclick="saveLocation()" style="font-weight: 800;">Save</button>
+            </div>
+        </div>
+
+        <!-- Date/Time Sheet -->
+        <div class="bottom-sheet" id="sheetTime">
+            <div class="bottom-sheet-handle"></div>
+            <div class="bottom-sheet-title-wrapper">
+                <div class="bottom-sheet-title">Time selection</div>
+            </div>
+
+            <div class="calendar-card">
+                <div class="calendar-header-nav">
+                    <img src="assets/datetime_modal/arrow_left.svg" style="width: 24px; height: 24px;" alt="prev">
+                    <div class="calendar-month-year">August, 2023</div>
+                    <img src="assets/datetime_modal/arrow_right.svg" style="width: 24px; height: 24px;" alt="next">
+                </div>
+                <div class="calendar-days-grid">
+                    <!-- Weekdays -->
+                    <div class="calendar-weekday">Mon</div>
+                    <div class="calendar-weekday">Tue</div>
+                    <div class="calendar-weekday">Wed</div>
+                    <div class="calendar-weekday">Thu</div>
+                    <div class="calendar-weekday">Fri</div>
+                    <div class="calendar-weekday">Sat</div>
+                    <div class="calendar-weekday">Sun</div>
+
+                    <!-- Row 1 -->
+                    <div class="calendar-day-cell other-month">31</div>
+                    <div class="calendar-day-cell">1</div>
+                    <div class="calendar-day-cell">2</div>
+                    <div class="calendar-day-cell today-cell">3</div>
+                    <div class="calendar-day-cell">4</div>
+                    <div class="calendar-day-cell">5</div>
+                    <div class="calendar-day-cell">6</div>
+
+                    <!-- Row 2 -->
+                    <div class="calendar-day-cell">7</div>
+                    <div class="calendar-day-cell">8</div>
+                    <div class="calendar-day-cell">9</div>
+                    <div class="calendar-day-cell">10</div>
+                    <div class="calendar-day-cell">11</div>
+                    <div class="calendar-day-cell">12</div>
+                    <div class="calendar-day-cell">13</div>
+
+                    <!-- Row 3 -->
+                    <div class="calendar-day-cell selected-day">14</div>
+                    <div class="calendar-day-cell">15</div>
+                    <div class="calendar-day-cell">16</div>
+                    <div class="calendar-day-cell">17</div>
+                    <div class="calendar-day-cell">18</div>
+                    <div class="calendar-day-cell">19</div>
+                    <div class="calendar-day-cell">20</div>
+
+                    <!-- Row 4 -->
+                    <div class="calendar-day-cell">21</div>
+                    <div class="calendar-day-cell">22</div>
+                    <div class="calendar-day-cell">23</div>
+                    <div class="calendar-day-cell">24</div>
+                    <div class="calendar-day-cell">25</div>
+                    <div class="calendar-day-cell">26</div>
+                    <div class="calendar-day-cell">27</div>
+
+                    <!-- Row 5 -->
+                    <div class="calendar-day-cell">28</div>
+                    <div class="calendar-day-cell">29</div>
+                    <div class="calendar-day-cell">30</div>
+                    <div class="calendar-day-cell">31</div>
+                    <div class="calendar-day-cell other-month">1</div>
+                    <div class="calendar-day-cell other-month">2</div>
+                    <div class="calendar-day-cell other-month">3</div>
+                </div>
+            </div>
+
+            <div class="time-inputs-container">
+                <div class="time-inputs-row">
+                    <div class="time-box">
+                        <input type="text" placeholder="Start Time*" value="8:00 PM">
+                        <img src="assets/datetime_modal/clock.svg" style="width: 17px; height: 17px;" alt="clock">
+                    </div>
+                    <div class="time-box">
+                        <input type="text" placeholder="End Time*" value="10:00 PM">
+                        <img src="assets/datetime_modal/clock.svg" style="width: 17px; height: 17px;" alt="clock">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sheet-save-container">
+                <button class="sheet-save-button" onclick="saveTime()" style="font-weight: 800;">Save</button>
+            </div>
+        </div>
+
+        <!-- Activity Sheet -->
+        <div class="bottom-sheet" id="sheetActivity">
+            <div class="bottom-sheet-handle"></div>
+            <div class="bottom-sheet-title-wrapper">
+                <div class="bottom-sheet-title">Activity</div>
+            </div>
+
+            <div class="activity-scroll-area">
+                <div class="location-search-wrapper" style="margin-top: 8px;">
+                    <img src="assets/activity_modal/search.svg" style="width: 16px; height: 16px;" alt="search">
+                    <input type="text" class="activity-search-bar" placeholder="Search Activity"
+                        style="background: transparent; border: none; outline: none; flex: 1;">
+                </div>
+
+                <!-- Going out -->
+                <div class="activity-group">
+                    <div class="activity-group-title">Going out</div>
+                    <div class="activity-chips">
+                        <div class="activity-chip">🍹 Bar</div>
+                        <div class="activity-chip">🍖 BBQ</div>
+                        <div class="activity-chip">🍻 Brewery</div>
+                        <div class="activity-chip">🥞 Brunch</div>
+                        <div class="activity-chip">🎰 Casino</div>
+                        <div class="activity-chip">💃 Clubbing</div>
+                        <div class="activity-chip">☕ Coffee</div>
+                        <div class="activity-chip">💃 Dancing</div>
+                        <div class="activity-chip">🍽️ Dinner</div>
+                        <div class="activity-chip">🍷 Drinks</div>
+                        <div class="activity-chip">🎤 Karaoke</div>
+                    </div>
+                </div>
+
+                <!-- Outdoor Activities -->
+                <div class="activity-group">
+                    <div class="activity-group-title">Outdoor Activities</div>
+                    <div class="activity-chips">
+                        <div class="activity-chip">🎒 Backpacking</div>
+                        <div class="activity-chip">🏖️ Beach</div>
+                        <div class="activity-chip">🦜 Birdwatching</div>
+                        <div class="activity-chip">⛵ Boating</div>
+                        <div class="activity-chip">🔥 Bonfires</div>
+                        <div class="activity-chip">⛺ Camping</div>
+                        <div class="activity-chip">🛋️ Chilling</div>
+                        <div class="activity-chip">🥁 Drum Circle</div>
+                        <div class="activity-chip">🍄 Foraging</div>
+                        <div class="activity-chip">🌳 Hammocking</div>
+                        <div class="activity-chip selected">🥾 Hiking</div>
+                        <div class="activity-chip">🪁 Kiting</div>
+                        <div class="activity-chip">🧙🏻 Larping</div>
+                    </div>
+                </div>
+
+                <!-- Teams -->
+                <div class="activity-group">
+                    <div class="activity-group-title">Teams</div>
+                    <div class="activity-chips" style="justify-content: center;">
+                        <div class="activity-chip selected">⚽</div>
+                        <div class="activity-chip">🏈</div>
+                        <div class="activity-chip">🏀</div>
+                        <div class="activity-chip">⚾</div>
+                        <div class="activity-chip">🏒</div>
+                    </div>
+                    <!-- Show more button -->
+                    <div class="activity-show-more">
+                        <span class="activity-show-more-text">Show More</span>
+                        <svg width="12" height="6" viewBox="0 0 12 6" fill="none">
+                            <path d="M1 1L6 5L11 1" stroke="#818D9A" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sheet-save-container">
+                <button class="sheet-save-button" onclick="saveActivity()">Save</button>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-wrapper">
+                <div class="input-container" id="inputBox">
+                    <div class="glow-layer"></div>
+                    <div class="plus-icon-container">
+                        <img src="assets/full_screen/ed43cac8fcfac9b75ee788843a449bc635d60759.svg" class="plus-icon"
+                            alt="plus">
+                    </div>
+                    <input type="text" class="input-field" id="inputField" placeholder="Write a message...">
+                </div>
+                <div class="owting-button" id="owtingBtn">
+                    <img src="assets/full_screen/46a454a14686c0d6da2856f10afde8515e6333f2.svg" class="button-bg"
+                        alt="bg">
+                    <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" class="button-logo"
+                        alt="logo">
+                    <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW Fan Selection Menu -->
+        <div class="selection-menu" id="selectionMenu">
+            <div class="selection-pill" id="btnPlanning">
+                <img src="assets/full_screen/bc3f4b7f6bcc3a68d977dd1e28ecf9d032afc7cc.svg" alt="Planning">
+                <span>Let’s get planning</span>
+            </div>
+            <div class="selection-pill" id="btnSurprise">
+                <img src="assets/full_screen/435cc90b9a04490badba1e0b76b568e08aad7fe5.svg" alt="Surprise">
+                <span>Surprise Me!</span>
+            </div>
+            <div class="selection-pill" id="btnManual">
+                <img src="assets/full_screen/0de88c96f3adf1c8681abf6608934131db3c91b8.svg" alt="Manual">
+                <span>Create manually</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const owtingBtn = document.getElementById('owtingBtn');
+        const selectionMenu = document.getElementById('selectionMenu');
+        const btnPlanning = document.getElementById('btnPlanning');
+        const btnSurprise = document.getElementById('btnSurprise');
+        const btnManual = document.getElementById('btnManual');
+        const inputBox = document.getElementById('inputBox');
+        const inputField = document.getElementById('inputField');
+        const chatArea = document.getElementById('chatBody');
+        const aiOverlay = document.getElementById('aiOverlay');
+        const sheetBackdrop = document.getElementById('sheetBackdrop');
+
+        // State
+        let aiMode = false;
+        let selectionMode = false;
+        let hasText = false;
+        let selectedActivity = '🥾 Hiking';
+        const completed = { location: false, time: false, activity: false };
+
+        // Scroll chat to bottom init
+        if (chatArea) chatArea.scrollTop = chatArea.scrollHeight;
+
+        function updateButtonState() {
+            if (aiMode || selectionMode) {
+                owtingBtn.classList.add('active');
+            } else {
+                owtingBtn.classList.remove('active');
+            }
+
+            if (hasText) {
+                owtingBtn.classList.add('has-text');
+            } else {
+                owtingBtn.classList.remove('has-text');
+            }
+        }
+
+        inputField.addEventListener('input', (e) => {
+            hasText = e.target.value.trim().length > 0;
+            updateButtonState();
+        });
+
+        // Main Owting Button Interaction
+        owtingBtn.addEventListener('click', () => {
+            if (aiMode && hasText) {
+                // Handle Sending
+                console.log("Sending message:", inputField.value);
+                inputField.value = '';
+                hasText = false;
+                updateButtonState();
+
+                const dots = document.getElementById('generatingDots');
+                if (dots) dots.style.display = 'flex';
+
+                setTimeout(() => {
+                    if (dots) dots.style.display = 'none';
+                    const resultMsg = document.getElementById('resultMessage');
+                    if (resultMsg) resultMsg.style.display = 'flex';
+                    const cards = document.getElementById('eventCards');
+                    if (cards) cards.classList.add('visible');
+                    aiOverlay.scrollTo({ top: aiOverlay.scrollHeight, behavior: 'smooth' });
+                }, 2000);
+                return;
+            }
+
+            if (aiMode) {
+                // Exit AI Mode
+                closeAll();
+            } else if (selectionMode) {
+                // Exit Selection Mode
+                selectionMode = false;
+                selectionMenu.classList.remove('active');
+                chatArea.classList.remove('blurred');
+                updateButtonState();
+            } else {
+                // Enter Selection Mode (The new fan menu)
+                selectionMode = true;
+                selectionMenu.classList.add('active');
+                chatArea.classList.add('blurred');
+                updateButtonState();
+            }
+        });
+
+        // Handle Selection Options
+        btnPlanning.addEventListener('click', () => {
+            selectionMode = false;
+            aiMode = true;
+            selectionMenu.classList.remove('active');
+            aiOverlay.classList.add('active');
+            inputBox.classList.add('ai-mode');
+            inputField.placeholder = "Ask Owting AI...";
+            inputField.focus();
+            updateButtonState();
+        });
+
+        // Demo close for others
+        [btnSurprise, btnManual].forEach(btn => {
+            btn.addEventListener('click', () => {
+                closeAll();
+            });
+        });
+
+        function closeAll() {
+            selectionMode = false;
+            aiMode = false;
+            selectionMenu.classList.remove('active');
+            aiOverlay.classList.remove('active');
+            const wrapper = document.querySelector('.input-wrapper');
+            if (wrapper) wrapper.classList.remove('ai-mode');
+            inputBox.classList.remove('ai-mode');
+            chatArea.classList.remove('blurred');
+            inputField.placeholder = "Write a message...";
+            inputField.value = '';
+            hasText = false;
+            closeSheet();
+            updateButtonState();
+        }
+
+        function resetWizard() {
+            completed.location = false;
+            completed.time = false;
+            completed.activity = false;
+            document.querySelectorAll('.ai-option-row').forEach(r => r.classList.remove('completed'));
+            document.querySelectorAll('.ai-option-value').forEach(v => v.textContent = '');
+            document.getElementById('eventCards').classList.remove('visible');
+            document.getElementById('quickResponses').classList.remove('visible');
+            document.getElementById('resultMessage').style.display = 'none';
+            document.getElementById('generatingDots').classList.remove('visible');
+        }
+
+        // Bottom sheets
+        function openSheet(type) {
+            sheetBackdrop.classList.add('active');
+            document.getElementById('sheetLocation').classList.remove('active');
+            document.getElementById('sheetTime').classList.remove('active');
+            document.getElementById('sheetActivity').classList.remove('active');
+
+            // Map 'location' -> 'sheetLocation'
+            const sheetId = 'sheet' + type.charAt(0).toUpperCase() + type.slice(1);
+            const sheet = document.getElementById(sheetId);
+            if (sheet) setTimeout(() => sheet.classList.add('active'), 10);
+        }
+
+        function closeSheet() {
+            sheetBackdrop.classList.remove('active');
+            document.querySelectorAll('.bottom-sheet').forEach(s => s.classList.remove('active'));
+        }
+
+        function markCompleted(type, value) {
+            completed[type] = true;
+            const rowId = 'opt' + type.charAt(0).toUpperCase() + type.slice(1);
+            const row = document.getElementById(rowId);
+            if (row) row.classList.add('completed');
+
+            const valId = 'val' + type.charAt(0).toUpperCase() + type.slice(1);
+            const valEl = document.getElementById(valId);
+            if (valEl) valEl.textContent = value;
+
+            // Check if all completed
+            if (completed.location && completed.time && completed.activity) {
+                generateResults();
+            }
+        }
+
+        function saveLocation() {
+            const input = document.querySelector('.location-search-input');
+            const val = input ? input.value : 'Macarthur Park';
+            closeSheet();
+            markCompleted('location', val);
+        }
+
+        function saveTime() {
+            const startInput = document.querySelector('#sheetTime .time-box input[placeholder="Start Time*"]');
+            const val = startInput ? (startInput.value || '8:00 PM') : '8:00 PM';
+            closeSheet();
+            markCompleted('time', 'Aug 14, ' + val);
+        }
+
+        function generateResults() {
+            const dots = document.getElementById('generatingDots');
+            dots.classList.add('visible');
+            dots.style.display = 'flex';
+
+            aiOverlay.scrollTo({ top: aiOverlay.scrollHeight, behavior: 'smooth' });
+
+            setTimeout(() => {
+                dots.classList.remove('visible');
+                dots.style.display = 'none';
+
+                document.getElementById('resultMessage').style.display = 'flex';
+                document.getElementById('eventCards').classList.add('visible');
+                document.getElementById('quickResponses').classList.add('active'); // Changed from visible to active
+
+                setTimeout(() => {
+                    aiOverlay.scrollTo({ top: aiOverlay.scrollHeight, behavior: 'smooth' });
+                }, 50);
+            }, 2000);
+        }
+
+        function handleAction(type) {
+            if (type === 'regenerate') {
+                document.getElementById('eventCards').classList.remove('visible');
+                document.getElementById('quickResponses').classList.remove('active');
+                document.getElementById('resultMessage').style.display = 'none';
+                generateResults();
+            } else if (type === 'share') {
+                alert('Shared with the group! 🚀');
+            }
+        }
+
+        // Activity selection logic
+        document.querySelectorAll('.activity-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                // In a real app we might only allow one selected at a time or toggle them
+                // For this demo, let's toggle the selected class
+                chip.classList.toggle('selected');
+                selectedActivity = chip.textContent.trim();
+            });
+        });
+
+        function saveActivity() {
+            closeSheet();
+            markCompleted('activity', selectedActivity);
+        }
+
+        // Calendar day selection
+        document.querySelectorAll('.calendar-day-cell:not(.other-month)').forEach(day => {
+            day.addEventListener('click', () => {
+                document.querySelectorAll('.calendar-day-cell').forEach(d => d.classList.remove('selected-day'));
+                day.classList.add('selected-day');
+            });
+        });
+    </script>
+</body>
+
+</html>
