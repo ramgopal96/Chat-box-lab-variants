@@ -2,12 +2,32 @@ import React, { useState } from 'react';
 import { Microphone, PaperPlaneRight, X, DownloadSimple, FileCode } from '@phosphor-icons/react';
 import './styles/Handoff.css';
 
-const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting AI...") => {
-    const cleanTitle = title.replace(/^[0-9\.\s]+/, ''); // Strip leading numbers like "1. "
-    const componentName = cleanTitle.split('(')[0].trim().replace(/[^a-zA-Z0-9]/g, '') + 'Input';
+const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting AI...", leftIconType = null, isExitMode = false) => {
+    // 1. Clean the title to create a valid React Component Name (e.g., "1. Aura" -> "AuraInput")
+    const cleanTitle = title.replace(/^[0-9\.\s]+/, '').split('(')[0].trim().replace(/[^a-zA-Z0-9]/g, '');
+    const componentName = cleanTitle + 'Input';
 
-    // Common CSS shared by all variants (Layout, Inputs, Icons, Base Keyframes)
-    const COMMON_CSS = `
+    // 2. Inline SVG strings (Dependency-free ingredients)
+    const ICONS = {
+        microphone: `<svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"></path></svg>`,
+        paperPlane: `<svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-157.76,48.69a16,16,0,0,0-2.24,5.8H48a16,16,0,0,0-15,21.32l25.7,77.1L95.6,220.39A16,16,0,0,0,110.82,232H112a16,16,0,0,0,14.07-9l97.66-179.79A16,16,0,0,0,227.32,28.68Z"></path></svg>`,
+        exit: `<svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>`
+    };
+
+    // 3. Embedded Styles (Portable Ingredients)
+    const CSS = `
+    /* Resets & Container */
+    * { box-sizing: border-box; }
+    
+    .demo-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f0f4f8; /* The "Clean Slate" background to make effects pop */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
     /* Layout & Base */
     .input-box {
         position: relative;
@@ -17,10 +37,11 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
         padding: 16px 22px;
         background: white;
         border-radius: 30px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
         width: 100%;
-        max-width: 400px; /* Adjust as needed */
+        max-width: 400px;
         transform-style: preserve-3d;
+        transition: transform 0.2s ease;
     }
     
     .input-field {
@@ -28,34 +49,38 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
         border: none;
         outline: none;
         background: transparent;
-        font-size: 14px;
+        font-size: 16px;
         color: #111827;
         font-family: inherit;
-        padding-left: 0;
+        padding: 0;
+        margin: 0;
     }
 
-    .icon-wrapper {
+    .input-icon-left {
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #6B7280;
+        color: #9CA3AF;
+        margin-right: 4px;
     }
 
     .action-button {
-        width: 36px;
-        height: 36px;
-        background: #0F172A;
+        width: 40px;
+        height: 40px;
+        background: ${isExitMode ? 'transparent' : '#0F172A'};
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         border: none;
         cursor: pointer;
-        transition: transform 0.2s;
+        transition: all 0.2s ease;
+        color: ${isExitMode ? '#1F2937' : 'white'};
     }
     
     .action-button:hover {
         transform: scale(1.05);
+        background: ${isExitMode ? 'rgba(0,0,0,0.05)' : '#1E293B'};
     }
 
     /* Aura / Halo Layers */
@@ -75,7 +100,7 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
         pointer-events: none;
     }
 
-    /* Animations */
+    /* Base Keyframes */
     @property --angle {
         syntax: '<angle>';
         initial-value: 0deg;
@@ -87,6 +112,16 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
         to { --angle: 360deg; }
     }
     
+    @keyframes breatheInner {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50% { opacity: 1.0; transform: scale(1.05); }
+    }
+
+    @keyframes breatheOuter {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.1); }
+    }
+    
     @keyframes breatheAmbient {
         0%, 100% { opacity: 0.1; }
         50% { opacity: 0.4; }
@@ -96,114 +131,143 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
         0% { background-position: -200% center; }
         100% { background-position: 200% center; }
     }
+
+    @keyframes slowDrift {
+        0%, 100% { transform: translateY(-5px); filter: blur(20px); }
+        50% { transform: translateY(5px); filter: blur(30px); }
+    }
+
+    @keyframes borderFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Variant Implementation */
+    ${variantClass === 'v-original' ? `
+        .halo-beam {
+            inset: 4px;
+            background: conic-gradient(from var(--angle), #6FC9E8, #a0d8f0, rgba(255, 255, 255, 0.8), #a0d8f0, #6FC9E8);
+            animation: breatheInner 4s ease-in-out infinite;
+            filter: blur(16px);
+        }
+        .halo-ambient {
+            inset: 0px;
+            background: conic-gradient(from var(--angle), #6FC9E8, rgba(255, 255, 255, 0.3), #6FC9E8, #6FC9E8);
+            animation: breatheOuter 5s ease-in-out infinite;
+            filter: blur(15px);
+        }
+        .glow-layer {
+            inset: -5px;
+            background: conic-gradient(from var(--angle), #6FC9E8, rgba(255, 255, 255, 0.1), #6FC9E8);
+            animation: breatheAmbient 6s ease-in-out infinite;
+            filter: blur(20px);
+            opacity: 0.2;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-pulse' ? `
+        @keyframes flarePulse {
+            0%, 100% { transform: scale(0.95); opacity: 0.4; filter: blur(15px); }
+            50% { transform: scale(1.1); opacity: 0.8; filter: blur(25px); }
+        }
+        .halo-beam {
+            inset: 4px;
+            background: conic-gradient(from var(--angle), #6FC9E8, #ffffff, #6FC9E8);
+            animation: flarePulse 3s ease-in-out infinite;
+        }
+        .halo-ambient {
+            inset: -2px;
+            background: #6FC9E8;
+            opacity: 0.3;
+            animation: flarePulse 4s ease-in-out infinite 0.5s;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-orbs' ? `
+        @keyframes audioPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; filter: blur(10px); }
+            50% { transform: scale(1.03); opacity: 0.9; filter: blur(14px); }
+        }
+        .halo-beam {
+            inset: 4px;
+            background: conic-gradient(from var(--angle), #6FC9E8, #fff, #6FC9E8);
+            animation: spin 4s linear infinite, audioPulse 1.2s ease-in-out infinite;
+            filter: blur(16px);
+        }
+        .halo-ambient {
+            inset: 0px;
+            background: rgba(111, 201, 232, 0.4);
+            animation: spin 6s linear infinite reverse, audioPulse 1.2s ease-in-out infinite 0.1s;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-shimmer' ? `
+        .halo-beam, .halo-ambient {
+            background: linear-gradient(90deg, transparent, #6FC9E8, #fff, #6FC9E8, transparent);
+            background-size: 200% 100%;
+            animation: shimmerMove 5s linear infinite;
+            inset: -2px;
+            border-radius: 40px;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-steady' ? `
+        .halo-ambient {
+            inset: -5px;
+            background: linear-gradient(to right, #6FC9E8, #A5F3FC);
+            animation: slowDrift 5s ease-in-out infinite;
+        }
+        .glow-layer {
+            animation: slowDrift 8s ease-in-out infinite reverse;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-flowing-border' ? `
+        .halo-beam {
+            inset: -3px;
+            background: linear-gradient(90deg, #6FC9E8, #ffffff, #6FC9E8, #ffffff, #6FC9E8);
+            background-size: 300% 300%;
+            filter: blur(16px);
+            border-radius: 34px;
+            animation: borderFlow 4s ease-in-out infinite;
+            z-index: -1;
+            opacity: 1;
+        }
+        .halo-ambient {
+            inset: -4px;
+            background: linear-gradient(90deg, rgba(111, 201, 232, 0.4), rgba(255, 255, 255, 0.6), rgba(111, 201, 232, 0.4));
+            background-size: 300% 300%;
+            filter: blur(20px);
+            border-radius: 36px;
+            animation: borderFlow 4s ease-in-out infinite reverse;
+            opacity: 0.6;
+        }
+        .glow-layer {
+            inset: -10px;
+            background: radial-gradient(circle, rgba(111, 201, 232, 0.3) 0%, transparent 70%);
+            filter: blur(15px);
+            opacity: 0.4;
+            animation: breatheAmbient 4s ease-in-out infinite;
+        }
+    ` : ''}
     `;
 
-    // specific CSS for each variant
-    const VARIANT_CSS = {
-        'v-original': `
-            .halo-beam {
-                inset: 4px;
-                background: conic-gradient(from var(--angle), #6FC9E8, #a0d8f0, rgba(255, 255, 255, 0.8), #a0d8f0, #6FC9E8);
-                filter: blur(8px);
-                animation: spin 10s linear infinite;
-            }
-            .halo-ambient {
-                inset: 0px;
-                background: conic-gradient(from var(--angle), #6FC9E8, rgba(255, 255, 255, 0.3), #6FC9E8, #6FC9E8);
-                filter: blur(15px);
-                animation: spin 14s linear infinite;
-            }
-        `,
-        'v-pulse': `
-            @keyframes flarePulse {
-                0%, 100% { transform: scale(0.95); opacity: 0.4; filter: blur(15px); }
-                50% { transform: scale(1.1); opacity: 0.8; filter: blur(25px); }
-            }
-            .halo-beam {
-                inset: 4px;
-                background: conic-gradient(from var(--angle), #6FC9E8, #ffffff, #6FC9E8);
-                animation: flarePulse 3s ease-in-out infinite;
-            }
-            .halo-ambient {
-                inset: -2px;
-                background: #6FC9E8;
-                opacity: 0.3;
-                animation: flarePulse 4s ease-in-out infinite 0.5s;
-            }
-        `,
-        'v-orbs': `
-            @keyframes audioPulse {
-                0%, 100% { transform: scale(1); opacity: 0.5; filter: blur(10px); }
-                50% { transform: scale(1.03); opacity: 0.9; filter: blur(14px); }
-            }
-            .halo-beam {
-                inset: 4px;
-                background: conic-gradient(from var(--angle), #6FC9E8, #fff, #6FC9E8);
-                animation: spin 4s linear infinite, audioPulse 1.2s ease-in-out infinite;
-            }
-            .halo-ambient {
-                inset: 0px;
-                background: rgba(111, 201, 232, 0.4);
-                animation: audioPulse 1.2s ease-in-out infinite 0.1s;
-            }
-        `,
-        'v-shimmer': `
-            .halo-beam, .halo-ambient {
-                background: linear-gradient(90deg, transparent, #6FC9E8, #fff, #6FC9E8, transparent);
-                background-size: 200% 100%;
-                animation: shimmerMove 5s linear infinite;
-                inset: -2px;
-            }
-        `,
-        'v-steady': `
-            @keyframes slowDrift {
-                0%, 100% { transform: translateY(-5px); filter: blur(20px); }
-                50% { transform: translateY(5px); filter: blur(30px); }
-            }
-            .halo-ambient {
-                inset: -5px;
-                background: linear-gradient(to right, #6FC9E8, #A5F3FC);
-                animation: slowDrift 5s ease-in-out infinite;
-            }
-        `,
-        'v-flowing-border': `
-            .halo-beam {
-                inset: -3px;
-                background: conic-gradient(from var(--angle), #6FC9E8, #89D4F0, #DEF8FF, #ffffff, #DEF8FF, #89D4F0, #6FC9E8);
-                filter: blur(5px);
-                border-radius: 34px;
-                animation: spin 3s linear infinite;
-                opacity: 1;
-            }
-            .halo-ambient {
-                inset: -4px;
-                background: conic-gradient(from var(--angle), #6FC9E8, rgba(111, 201, 232, 0.4), #6FC9E8);
-                filter: blur(10px);
-                border-radius: 36px;
-                animation: spin 3s linear infinite reverse;
-                opacity: 0.5;
-            }
-            .glow-layer {
-                inset: -10px;
-                background: radial-gradient(circle, rgba(111, 201, 232, 0.3) 0%, transparent 70%);
-                filter: blur(20px);
-                opacity: 0.3;
-                animation: breatheAmbient 4s ease-in-out infinite;
-            }
-        `
-    };
-
-    const selectedVariantCSS = VARIANT_CSS[variantClass] || VARIANT_CSS['v-original'];
-
-    // Construct the single-file component
+    // 4. Component Template (The Final Output)
     const code = `import React from 'react';
+
+// Wrapper component to center the input on screen
+const DemoWrapper = ({ children }) => (
+    <div className="demo-wrapper">
+        {children}
+    </div>
+);
 
 export const ${componentName} = () => {
     return (
-        <>
+        <DemoWrapper>
             <style>{\`
-                ${COMMON_CSS}
-                ${selectedVariantCSS}
+                ${CSS}
             \`}</style>
             
             <div className="input-box">
@@ -213,19 +277,23 @@ export const ${componentName} = () => {
                     <div className="glow-layer" />
                 </div>
                 
+                ${leftIconType ? `
+                <div className="input-icon-left">
+                    <div style={{ color: '#9CA3AF', display: 'flex' }} dangerouslySetInnerHTML={{ __html: \`${ICONS[leftIconType]}\` }} />
+                </div>` : ''}
+
                 <input 
                     type="text" 
                     className="input-field" 
                     placeholder="${defaultText}" 
+                    readOnly
                 />
 
                 <button className="action-button">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                    <div style={{ display: 'flex' }} dangerouslySetInnerHTML={{ __html: \`${isExitMode ? ICONS.exit : ICONS.paperPlane}\` }} />
                 </button>
             </div>
-        </>
+        </DemoWrapper>
     );
 };
 
@@ -235,8 +303,21 @@ export default ${componentName};
 };
 
 const HaloVariant = ({ title, stateName, variantClass, showTitle = true, placeholder = "Ask Owting AI...", isExitMode = false, techDetails, leftIcon }) => {
+
+    // Determine the icon type for the generator
+    const getLeftIconType = () => {
+        if (title.toLowerCase().includes('audio')) return 'microphone';
+        return null;
+    };
+
     const handleDownload = () => {
-        const { code, filename } = GENERATE_REACT_COMPONENT(`${title}. ${stateName}`, variantClass, placeholder);
+        const { code, filename } = GENERATE_REACT_COMPONENT(
+            `${title}`,
+            variantClass,
+            placeholder,
+            getLeftIconType(),
+            isExitMode
+        );
 
         const blob = new Blob([code], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
@@ -258,36 +339,16 @@ const HaloVariant = ({ title, stateName, variantClass, showTitle = true, placeho
                     <button
                         className="variant-download-btn"
                         onClick={handleDownload}
-                        title="Download React Component"
+                        title="Download Source Code"
                     >
                         <FileCode size={16} weight="duotone" />
                         <span>Source</span>
                     </button>
 
-                    {/* JSON SPEC DOWNLOAD - As requested */}
                     <button
                         className="variant-download-btn"
-                        onClick={() => {
-                            const spec = {
-                                title: title,
-                                variant: variantClass,
-                                description: techDetails,
-                                type: "interaction-variant",
-                                framework: "react",
-                                library: "framer-motion-css-modules",
-                                files: [`${title.replace(/[^a-zA-Z0-9]/g, '')}.jsx`]
-                            };
-                            const blob = new Blob([JSON.stringify(spec, null, 2)], { type: 'application/json' });
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = `${title.replace(/[^a-zA-Z0-9]/g, '')}-spec.json`;
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                            URL.revokeObjectURL(url);
-                        }}
-                        title="Download Interaction JSON Spec"
+                        onClick={handleDownload}
+                        title="Download Source Code"
                         style={{ marginLeft: '-8px' }}
                     >
                         <DownloadSimple size={16} weight="bold" />
@@ -374,8 +435,8 @@ const ControlsPanel = ({ speed, setSpeed, blur, setBlur, text, setText }) => {
 };
 
 const Handoff = () => {
-    const [speed, setSpeed] = useState(3);
-    const [blur, setBlur] = useState(5);
+    const [speed, setSpeed] = useState(4);
+    const [blur, setBlur] = useState(16);
     const [text, setText] = useState("Ask Owting AI...");
     const [colorTheme, setColorTheme] = useState('owting');
 

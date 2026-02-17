@@ -13,6 +13,7 @@ import {
     Search,
     Check
 } from 'lucide-react';
+import AuraInput from './AuraInput';
 
 const App = () => {
     // State
@@ -647,7 +648,11 @@ const App = () => {
                     </>
                 )}
             </AnimatePresence>
-        </div >
+            {/* Preview of AuraInput */}
+            <div style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 9999 }}>
+                <AuraInput />
+            </div>
+        </div>
     );
 };
 

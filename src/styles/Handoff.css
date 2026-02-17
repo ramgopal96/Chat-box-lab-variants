@@ -607,17 +607,18 @@ body.lab-active {
 
 /* Variant Specific Animations */
 /* 2. Halo (Original Spin) */
+/* 2. Halo (Static but Breathing) */
 .v-original .halo-beam {
-    animation: spin var(--halo-speed, 10s) linear infinite, breatheInner 4s ease-in-out infinite;
-    filter: blur(var(--halo-blur, 8px));
+    animation: breatheInner 4s ease-in-out infinite;
+    filter: blur(var(--halo-blur, 16px));
 }
 
 .v-original .halo-ambient {
-    animation: spin calc(var(--halo-speed, 10s) * 1.4) linear infinite, breatheOuter 5s ease-in-out infinite;
+    animation: breatheOuter 5s ease-in-out infinite;
 }
 
 .v-original .glow-layer {
-    animation: spin calc(var(--halo-speed, 10s) * 2) linear infinite, breatheAmbient 6s ease-in-out infinite;
+    animation: breatheAmbient 6s ease-in-out infinite;
 }
 
 /* 3. Pulsing (Solar Flare) */
@@ -711,7 +712,7 @@ body.lab-active {
             #6FC9E8 95%,
             transparent 100%);
     animation: spin var(--halo-speed, 4s) linear infinite, audioPulse 1.2s ease-in-out infinite;
-    filter: blur(var(--halo-blur, 10px));
+    filter: blur(var(--halo-blur, 16px));
 }
 
 .v-orbs .halo-ambient {
@@ -765,31 +766,57 @@ body.lab-active {
 }
 
 /* 1. Aura (Flowing Border) */
+@keyframes borderFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 1. Aura (Flowing Border) - Refined for "Moving around stroke" feel */
 .v-flowing-border .halo-beam {
     inset: -3px;
-    background: conic-gradient(from var(--angle), var(--gradient-stops));
-    filter: blur(var(--halo-blur, 15px));
+    /* Use a linear gradient with multiple stops to create "hotspots" */
+    background: linear-gradient(90deg,
+            #6FC9E8,
+            #ffffff,
+            #6FC9E8,
+            #ffffff,
+            #6FC9E8);
+    background-size: 300% 300%;
+    filter: blur(var(--halo-blur, 16px));
     border-radius: 34px;
-    animation: spin var(--halo-speed, 6s) linear infinite;
+    animation: borderFlow var(--halo-speed, 4s) ease-in-out infinite;
     z-index: -1;
-    opacity: 0.85;
+    opacity: 1;
 }
 
 .v-flowing-border .halo-ambient {
     inset: -4px;
-    background: conic-gradient(from var(--angle), var(--ambient-stops));
-    filter: blur(var(--halo-blur, 30px));
+    background: linear-gradient(90deg,
+            rgba(111, 201, 232, 0.4),
+            rgba(255, 255, 255, 0.6),
+            rgba(111, 201, 232, 0.4));
+    background-size: 300% 300%;
+    filter: blur(var(--halo-blur, 20px));
     border-radius: 36px;
-    animation: spin var(--halo-speed, 6s) linear infinite reverse;
-    opacity: 0.5;
+    animation: borderFlow var(--halo-speed, 4s) ease-in-out infinite reverse;
+    opacity: 0.6;
 }
 
 /* Glow Layer (Dynamic) */
 .v-flowing-border .glow-layer {
     inset: -10px;
     background: radial-gradient(circle, var(--glow-color, rgba(111, 201, 232, 0.3)) 0%, transparent 70%);
-    filter: blur(20px);
-    opacity: 0.3;
+    filter: blur(15px);
+    opacity: 0.4;
     animation: breatheAmbient 4s ease-in-out infinite;
 }
 
