@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Microphone, PaperPlaneRight, X } from '@phosphor-icons/react';
+import { Microphone, PaperPlaneRight, X, DownloadSimple, FileCode } from '@phosphor-icons/react';
 import './styles/Handoff.css';
 
 const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting AI...") => {
@@ -252,9 +252,46 @@ const HaloVariant = ({ title, stateName, variantClass, showTitle = true, placeho
     return (
         <div className={`lab-item ${variantClass}`}>
             {showTitle && (
-                <div className="lab-header-row">
+                <div className="lab-header-row" style={{ gap: '16px' }}>
                     <h3 className="lab-title">{title}</h3>
-                    {/* Spec download removed for now - will be back up later */}
+
+                    <button
+                        className="variant-download-btn"
+                        onClick={handleDownload}
+                        title="Download React Component"
+                    >
+                        <FileCode size={16} weight="duotone" />
+                        <span>Source</span>
+                    </button>
+
+                    {/* JSON SPEC DOWNLOAD - As requested */}
+                    <button
+                        className="variant-download-btn"
+                        onClick={() => {
+                            const spec = {
+                                title: title,
+                                variant: variantClass,
+                                description: techDetails,
+                                type: "interaction-variant",
+                                framework: "react",
+                                library: "framer-motion-css-modules",
+                                files: [`${title.replace(/[^a-zA-Z0-9]/g, '')}.jsx`]
+                            };
+                            const blob = new Blob([JSON.stringify(spec, null, 2)], { type: 'application/json' });
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `${title.replace(/[^a-zA-Z0-9]/g, '')}-spec.json`;
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            URL.revokeObjectURL(url);
+                        }}
+                        title="Download Interaction JSON Spec"
+                        style={{ marginLeft: '-8px' }}
+                    >
+                        <DownloadSimple size={16} weight="bold" />
+                    </button>
                 </div>
             )}
 
